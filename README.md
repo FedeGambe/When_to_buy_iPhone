@@ -36,12 +36,13 @@ Questi dati temporali sono poi utilizzati per:
 ```
 data/        CSV dei prezzi (day_start, day_end, price), uno per modello
 src/         codice
-  rigenera_grafici.py   script: rigenera i grafici e li scrive in docs/index.html
+  rigenera_grafici.py   script: rigenera i grafici e li salva in docs/grafici.json
   scraper.py   script: prezzo attuale da Amazon
   utils/       funzioni riusabili
     dati.py      caricamento e preparazione dei dati (carica_modello)
     calcoli.py   calcoli dell'analisi (sconti, minimi, stagionalità, offerte...)
     grafici.py   grafici plotly
-docs/        pagina HTML del progetto (index.html) e cover (img/)
+docs/        pagina HTML (index.html), dati dei grafici (grafici.json), cover (img/)
+             per vederla in locale serve un server: `python -m http.server` dentro docs/
 Notebook/    analisi (price_comparison) e previsioni (Prophet, SARIMAX)
 ```

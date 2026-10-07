@@ -84,7 +84,7 @@ def costo_attesa(curve):
 
 
 def stagionalita(mensile, settimanale):
-    """mensile/settimanale: {anno di vita: dati} da calcoli.stagionalita_*. Bottoni (vedi POST_BOTTONI): anno di vita per
+    """mensile/settimanale: {anno di vita: dati} da calcoli.stagionalita_*. Bottoni (li crea lo script in docs/index.html, leggendo layout.meta): anno di vita per
     entrambi i grafici, 'Tutti'/modello per quello settimanale."""
     fig = make_subplots(rows=2, cols=1, vertical_spacing=0.22, row_heights=[0.4, 0.6], subplot_titles=(
         'Variazione % media del prezzo per mese (da settembre)', 'Variazione % media per settimana (da settembre)'))
@@ -131,39 +131,6 @@ def effetto_lancio(finestre):
 
 CONFIG_HTML = dict(displaylogo=False, responsive=True, displayModeBar='hover',
                    modeBarButtonsToRemove=['select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d'])
-
-
-# bottoni tondi (classe .gruppo della pagina) sopra il grafico: uno per etichetta in layout.meta, mostrano le tracce 2i e 2i+1
-POST_BOTTONI = """
-var gd = document.getElementById('{plot_id}'), sel = [0, 0], gruppi = [];
-function mostra() {
-  gruppi.forEach(function (g, k) { g.querySelectorAll('button').forEach(function (b, i) { b.className = i === sel[k] ? 'on' : ''; }); });
-  Plotly.restyle(gd, {visible: gd.data.map(function (t) {
-    return t.meta.anno === sel[0] && (t.meta.mod === undefined || t.meta.mod === sel[1]); })});
-}
-function gruppo(etichetta, nomi, k, tra) {
-  var g = document.createElement('div'), e = document.createElement('span');
-  g.className = 'gruppo'; g.style.marginBottom = '8px'; e.className = 'et'; e.textContent = etichetta; g.appendChild(e);
-  nomi.forEach(function (nome, i) {
-    var b = document.createElement('button'); b.textContent = nome; b.onclick = function () { sel[k] = i; mostra(); };
-    g.appendChild(b);
-  });
-  gruppi.push(g);
-  if (!tra || gd.clientWidth < 700) {  // schermi stretti: i bottoni vanno a capo, restano sopra il grafico
-    gd.parentNode.insertBefore(g, gd); return; }
-  // tra i due grafici: sopra il titolo del secondo, allineato al suo asse
-  gd.parentNode.style.position = 'relative'; g.style.position = 'absolute'; g.style.zIndex = 5; g.style.margin = 0;
-  gd.parentNode.appendChild(g);
-  function posiziona() {
-    var f = gd._fullLayout; if (!f) return;
-    g.style.left = f._size.l + 'px'; g.style.top = (f._size.t + (1 - f.yaxis2.domain[1]) * f._size.h - 36) + 'px';
-  }
-  gd.on('plotly_afterplot', posiziona); posiziona();
-}
-gruppo('Anno di vita', gd.layout.meta.anni, 0);
-gruppo('Grafico settimanale', gd.layout.meta.modelli, 1, true);
-mostra();
-"""
 
 
 def stile_html(fig):
