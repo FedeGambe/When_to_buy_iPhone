@@ -36,6 +36,7 @@ Questi dati temporali sono poi utilizzati per:
 ```
 data/        CSV dei prezzi (day_start, day_end, price), uno per modello
 src/         codice
+  rigenera_grafici.py   script: rigenera i grafici e li scrive in docs/index.html
   scraper.py   script: prezzo attuale da Amazon
   utils/       funzioni riusabili
     dati.py      caricamento e preparazione dei dati (carica_modello)
