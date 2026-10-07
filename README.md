@@ -36,12 +36,11 @@ Questi dati temporali sono poi utilizzati per:
 ```
 data/        CSV dei prezzi (day_start, day_end, price), uno per modello
 src/         codice
-  esporta.py   script: esporta PNG e pagina HTML interattiva in analisi/
   scraper.py   script: prezzo attuale da Amazon
   utils/       funzioni riusabili
     dati.py      caricamento e preparazione dei dati (carica_modello)
     calcoli.py   calcoli dell'analisi (sconti, minimi, stagionalità, offerte...)
     grafici.py   grafici plotly
-analisi/     report: notebook price_comparison, ANALISI_PREZZI.md, img/, analisi.html
-Notebook/    previsioni (Prophet, SARIMAX)
+docs/        pagina HTML del progetto (index.html) e cover (img/)
+Notebook/    analisi (price_comparison) e previsioni (Prophet, SARIMAX)
 ```
