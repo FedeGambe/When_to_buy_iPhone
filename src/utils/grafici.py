@@ -30,7 +30,7 @@ def sconto_per_giorno(dati, orizzonte=730):
     for m, df in dati.items():
         f = df[df['Giorni_dal_lancio'] <= orizzonte]
         fig.add_trace(go.Scatter(x=f['Giorni_dal_lancio'], y=f['Sconto'] * 100, name=m, mode='lines',
-                                 line=dict(color=_colore(m), width=2),
+                                 line=dict(color=_colore(m), width=1.5),
                                  customdata=f[['Data', 'Prezzo']],
                                  hovertemplate='%{customdata[0]|%d/%m/%Y} - %{y:.1f}% (%{customdata[1]:.0f} €)<extra>' + m + '</extra>'))
     fig.add_hline(y=0, line_dash='dot', line_color='gray')
@@ -121,7 +121,7 @@ def effetto_lancio(finestre):
     fig = go.Figure()
     for nome, serie in finestre.items():
         fig.add_trace(go.Scatter(x=serie.index, y=serie.values, name=nome, mode='lines',
-                                 line=dict(color=_colore(nome.split(' ')[0]), width=2)))
+                                 line=dict(color=_colore(nome.split(' ')[0]), width=1.5)))
     fig.add_vline(x=0, line_dash='dot', line_color='gray', annotation_text='lancio nuovo modello')
     fig.update_layout(title='Prezzo del modello precedente intorno al lancio del successivo',
                       xaxis_title='Giorni dal lancio del nuovo modello', yaxis_title='Variazione dal primo giorno (%)',
@@ -143,5 +143,5 @@ def stile_html(fig):
                       modebar=dict(orientation='h', bgcolor='rgba(0,0,0,0)', color=testo, activecolor='#efe3c8'))
     fig.update_xaxes(gridcolor='rgba(255,255,255,.1)', zeroline=False, linecolor='rgba(255,255,255,.2)')
     fig.update_yaxes(gridcolor='rgba(255,255,255,.1)', zeroline=False, linecolor='rgba(255,255,255,.2)')
-    fig.update_traces(selector=dict(type='scatter'), line_width=2.4)
+    fig.update_traces(selector=dict(type='scatter'), line_width=1.6)
     return fig

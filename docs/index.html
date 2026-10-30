@@ -534,7 +534,7 @@ const h1 = document.querySelector(".intro h1");
 function adattaTitolo() {
   h1.classList.add("adatta"); h1.style.fontSize = "100px";
   const f = 100 * h1.clientWidth / h1.scrollWidth;
-  if (f < 44) { h1.classList.remove("adatta"); h1.style.fontSize = ""; } else h1.style.fontSize = Math.min(f * .8, 150) + "px";  // 80% della larghezza, max 150px
+  if (f < 44) { h1.classList.remove("adatta"); h1.style.fontSize = ""; } else h1.style.fontSize = Math.min(f * .98, 150) + "px";  // tutta la larghezza del testo sotto, max 150px
 }
 adattaTitolo(); addEventListener("resize", adattaTitolo); document.fonts?.ready.then(adattaTitolo);
 </script>
